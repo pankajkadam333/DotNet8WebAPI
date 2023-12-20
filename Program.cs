@@ -1,8 +1,14 @@
+using DotNet8WebAPI;
 using DotNet8WebAPI.Services;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+string connectionString = builder.Configuration.GetConnectionString("OurHeroConnectionString");
+
+builder.Services.AddDbContext<OurHeroDbContext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Singleton);
 
 builder.Services.AddSingleton<IOurHeroService, OurHeroService>();
 //builder.Services.AddTransient<IOurHeroService, OurHeroService>();

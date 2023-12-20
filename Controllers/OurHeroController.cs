@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotNet8WebAPI.Controllers
-{   
+{
     [Route("api/[controller]")] //    /api/OurHero
     [ApiController]
     public class OurHeroController : ControllerBase
@@ -16,17 +16,17 @@ namespace DotNet8WebAPI.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get([FromQuery] bool? isActive = null)
+        public async Task<IActionResult> Get([FromQuery] bool? isActive = null)
         {
-            var heros = _heroService.GetAllHeros(isActive);
+            var heros = await _heroService.GetAllHeros(isActive);
             return Ok(heros);
         }
 
         [HttpGet("{id}")]
         //[Route("{id}")] // /api/OurHero/:id
-        public IActionResult Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            var hero = _heroService.GetHerosByID(id);
+            var hero = await _heroService.GetHerosByID(id);
             if (hero == null)
             {
                 return NotFound();
@@ -35,9 +35,9 @@ namespace DotNet8WebAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] AddUpdateOurHero heroObject)
+        public async Task<IActionResult> Post([FromBody] AddUpdateOurHero heroObject)
         {
-            var hero = _heroService.AddOurHero(heroObject);
+            var hero = await _heroService.AddOurHero(heroObject);
 
             if (hero == null)
             {
@@ -53,9 +53,9 @@ namespace DotNet8WebAPI.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public IActionResult Put([FromRoute] int id, [FromBody] AddUpdateOurHero heroObject)
+        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] AddUpdateOurHero heroObject)
         {
-            var hero = _heroService.UpdateOurHero(id, heroObject);
+            var hero = await _heroService.UpdateOurHero(id, heroObject);
             if (hero == null)
             {
                 return NotFound();
@@ -70,9 +70,9 @@ namespace DotNet8WebAPI.Controllers
 
         [HttpDelete]
         [Route("{id}")]
-        public IActionResult Delete([FromRoute] int id)
+        public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            if (!_heroService.DeleteHerosByID(id))
+            if (!await _heroService.DeleteHerosByID(id))
             {
                 return NotFound();
             }
