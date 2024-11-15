@@ -21,8 +21,8 @@ namespace DotNet8WebAPI
                 new OurHero
                 {
                     Id = 1,
-                    FirstName = "System",
-                    LastName = "",
+                    FirstName = "Pankaj",
+                    LastName = "Kadam",
                     isActive = true,
                 }
             );
@@ -30,10 +30,10 @@ namespace DotNet8WebAPI
                 new User
                 {
                     Id = 1,
-                    FirstName = "System",
-                    LastName = "",
-                    Username = "System",
-                    Password = "System",
+                    FirstName = "Pankaj",
+                    LastName = "Kadam",
+                    Username = "Pankaj333",
+                    Password = "Pass@123",
                 });
         }
 
